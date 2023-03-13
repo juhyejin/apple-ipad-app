@@ -26,7 +26,8 @@ function hideBasket(){
 
 //검색
 const headerEl = document.querySelector('header');
-const searchWraoEl = headerEl.querySelector('.search-wrap');
+const headerMenuEls = [...headerEl.querySelectorAll('ul.menu > li')]
+const searchWrapEl = headerEl.querySelector('.search-wrap');
 const searchStarterEl = headerEl.querySelector('.search-starter');
 const searchCloserEl = headerEl.querySelector('.search-closer')
 const searchShadowEl = headerEl.querySelector('.shadow')
@@ -35,9 +36,17 @@ searchCloserEl.addEventListener('click', hideSearch)
 searchShadowEl.addEventListener('click', hideSearch)
 function showSearch(){
   headerEl.classList.add('searching');
-  document.documentElement.classList.add('fixed')
+  document.documentElement.classList.add('fixed');
+  headerMenuElsDelay();
 }
 function hideSearch(){
   headerEl.classList.remove('searching');
-  document.documentElement.classList.remove('fixed')
+  document.documentElement.classList.remove('fixed');
+  headerMenuElsDelay();
+}
+
+function headerMenuElsDelay(){
+  headerMenuEls.reverse().forEach(function(headerMenuEl, index){
+    headerMenuEl.style.transitionDelay = `${index * .4/ headerMenuEls.length}s`
+  })
 }
